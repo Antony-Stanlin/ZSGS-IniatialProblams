@@ -1,24 +1,28 @@
+import java.util.Scanner;
+
 public class Problem11 {
     public static void main(String[] args) {
-        String s="a3n5c",s1="",temp="";
-        for(int i=0;i<s.length();i++){
+        Scanner sc = new Scanner(System.in);
 
-            if(Character.isDigit(s.charAt(i)))
-             temp+=s.charAt(i);
+        System.out.print("Enter the string:");
+        String s = sc.nextLine();
 
-            else if(Character.isLetter(s.charAt(i))){
-                if(temp.length()>0){
-                    char c=s1.charAt(s1.length()-1);
+        String result = "";
+        String tempVal = "";
+        String tempChar = "";
 
-                    for(int j=0;j<Integer.parseInt(temp);j++)
-                        s1+=c;
-                        
-                    temp="";
-                }
-                s1+=s.charAt(i);
-            }
-                
+        for (char c : s.toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                if (!tempChar.isBlank())
+                    result += tempChar.repeat(Integer.parseInt(tempVal));
+                tempChar = c + "";
+                tempVal = "";
+            } else
+                tempVal += c;
         }
-        System.out.println(s1);
+
+        result += tempChar.repeat(Integer.parseInt(tempVal));
+
+        System.out.println(result);
     }
 }
